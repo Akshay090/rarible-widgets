@@ -55,7 +55,7 @@
     <button on:click={changeLang('en')}>EN</button>
     <button on:click={changeLang('es')}>ES</button>
 
-    <button on:click={() => (visible = !visible)}>Show/hide clocky</button>
+    <button on:click={() => (visible = !visible)}>Show/hide widget</button>
 
     {#if visible}
       <div class="clock-container" transition:fade>

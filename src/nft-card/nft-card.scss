@@ -1,9 +1,12 @@
-.nft-card {
-  width: 80vw;
-  height: 210px;
-  min-height: 200px;
-  max-width: 670px;
-
+// base card
+:host {
+  all: initial;
+}
+p {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+.card {
   background-color: white;
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -14,29 +17,52 @@
   perspective: 1000px;
   margin: auto;
 }
-
 .card-inner {
   position: relative;
   width: 100%;
   height: 100%;
   text-align: center;
-  transition: transform 0.6s ease 0s;
+  transition: transform 0.6s;
   transform-style: preserve-3d;
-  box-shadow: rgb(0 0 0 / 25%) 0px 1px 6px;
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 }
+.flipped-card .card-inner {
+  transform: rotateY(180deg);
+}
+.card .error {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+.card .error-moji {
+  font-size: 50px;
+}
+.card .error-message {
+  font-size: 16px;
+}
 
+// card front start
 .card-front {
+  position: absolute;
   backface-visibility: hidden;
-  background: rgb(255, 255, 255);
+  background: #ffffff;
   border-radius: 5px;
   display: grid;
   grid-template-columns: 1fr 2fr;
   position: relative;
   width: 100%;
   height: 100%;
-  transform: translateY(0px);
+  transform: translateY(0);
   overflow: hidden;
+}
+.is-vertical {
+  grid-template-columns: 100%;
+  grid-template-rows: 60% 40%;
+}
+.card-front p {
+  margin: 0;
 }
 
 .asset-image-container {
@@ -53,6 +79,12 @@
   box-sizing: border-box;
 }
 
+.is-vertical .asset-image-container {
+  border-bottom: 1px solid #e2e6ef;
+  border-right: none;
+  width: 100%;
+}
+
 .asset-details-container {
   display: grid;
   grid-template-rows: auto;
@@ -60,25 +92,25 @@
   padding: 20px;
   align-items: center;
 }
-
 .asset-detail {
   display: flex;
 }
-
 .asset-detail .asset-detail-type {
   height: 35px;
   font-size: 12px;
   margin-right: 10px;
 }
-
+.asset-detail .asset-detail-badge {
+  width: 54px;
+  height: 30px;
+  font-size: 12px;
+}
 .asset-detail-name {
   font-weight: 400;
   text-align: left;
 }
-
-.asset-link {
-  text-decoration: none;
-  color: #222222;
+.asset-detail-price {
+  text-align: right;
 }
 .asset-detail-price {
   font-size: 18px;
@@ -88,22 +120,18 @@
   justify-content: flex-end;
   align-items: baseline;
 }
-
-.asset-detail-price .previous-value {
-  font-size: 14px;
-  color: #828282;
-}
 .asset-detail-price img {
   margin-left: 5px;
   width: 15px;
   align-self: center;
 }
-
-.asset-image {
-  background-image: url('https://lh3.googleusercontent.com/sJ-5wTKPHUJNePVxCGRV4UTsOf8TvY6r0ML89J9EuDWNrA8CljGT9TAhCv9afmyJJI2s8QNKcvbXP5erh0EKBjwX=s250');
-  background-size: contain;
+.asset-detail-price .value {
+  margin-left: 5px;
 }
-
+.asset-detail-price .previous-value {
+  font-size: 14px;
+  color: #828282;
+}
 .asset-action-buy {
   grid-column-start: 1;
   grid-column-end: 3;
@@ -121,4 +149,234 @@
   outline: none;
   border-style: none;
   text-transform: uppercase;
+}
+.asset-action-buy button:hover {
+  background: rgb(21, 61, 98);
+}
+.asset-link {
+  text-decoration: none;
+  color: #222222;
+}
+
+// pill
+
+.pill {
+  display: flex;
+  /* grid-template-columns: 1fr 2fr; */
+  border: 1px solid #e2e6ef;
+  box-sizing: border-box;
+  border-radius: 60px;
+  width: 100%;
+  height: 100%;
+  padding: 6px 12px 6px 6px;
+}
+.pill img {
+  height: 100%;
+  border-radius: 50px;
+  margin-right: 6px;
+  /* width: 100%; */
+  /* padding: 3px; */
+  /* box-sizing: border-box; */
+}
+.pill p {
+  text-align: center;
+  align-self: center;
+  margin: auto;
+  white-space: nowrap;
+  /* Centers text since grid-template-columns auto has glitch */
+  /* transform: translateX(-10%); */
+  backface-visibility: inherit;
+}
+.no-img {
+  grid-template-columns: 100%;
+}
+.no-img p {
+  /* Reverts transform (see above) */
+  /* transform: none; */
+}
+
+//   info btn
+
+.asset-action-info {
+  cursor: pointer;
+  transition: 200ms;
+  opacity: 0.4;
+  backface-visibility: hidden;
+}
+.asset-action-info #info-icon:hover {
+  opacity: 1;
+}
+
+// card back
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.card-back {
+  position: absolute;
+  backface-visibility: hidden;
+  width: 100%;
+  height: 100%;
+  transform: rotateY(180deg) translateZ(1px);
+  top: 0;
+  overflow: hidden;
+  padding: 16px 24px;
+  box-sizing: border-box;
+  font-size: 15px;
+  font-weight: 400;
+}
+.card-back p {
+  margin: 10px;
+}
+.card-back-inner {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(auto, 33%));
+  column-gap: 10px;
+  height: 100%;
+}
+.is-vertical {
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, minmax(auto, 33%));
+}
+.attribute-container {
+  text-align: left;
+  text-transform: capitalize;
+}
+.is-vertical .attribute-container {
+  margin: 15px 0;
+}
+.trait-header {
+  display: flex;
+  color: rgba(0, 0, 0, 0.87);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  line-height: 20px;
+  margin-bottom: 10px;
+}
+.trait-header p {
+  margin: 0 0 10px 8px;
+}
+.trait-icon {
+  height: 100%;
+}
+.trait_property {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  background: #edfbff;
+  border: 1px solid #2d9cdb;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  border: 1px solid #2d9cdb;
+  background-color: #edfbff;
+  border-radius: 6px;
+  padding: 8px;
+}
+.trait_property p {
+  margin: 7px 0;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.87);
+}
+.trait_property .trait_property-type {
+  margin: 0;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #2d9cdb;
+  opacity: 0.8;
+}
+.trait_property .trait_property-value {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.87);
+}
+.trait_ranking {
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+.trait_ranking .trait_ranking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.trait_ranking .trait_ranking-header .trait_ranking-header-name {
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 14px;
+}
+
+.trait_ranking .trait_ranking-header .trait_ranking-header-value {
+  color: #9e9e9e;
+  font-size: 11px;
+  text-transform: none;
+}
+.trait_ranking .trait_ranking-bar {
+  width: 100%;
+  height: 6px;
+  border-radius: 14px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  position: relative;
+  background: #f3f3f3;
+  margin-top: 4px;
+}
+
+.trait_ranking .trait_ranking-bar .trait_ranking-bar-fill {
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  height: 4px;
+  background: #3291e9;
+  border-radius: 14px;
+  max-width: calc(100% - 2px);
+}
+.trait-header-stats {
+  margin-bottom: 0;
+}
+.stat {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  justify-items: left;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.stat-name {
+  text-transform: capitalize;
+  margin-left: 5px;
+}
+.stat-value {
+  color: #2d9cdb;
+  font-size: 25px;
+  font-weight: 300;
+  margin-left: 5px;
+}
+.trait_boost {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.trait_boost .trait_boost-value {
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+.trait_boost .trait_boost-value p {
+  font-size: 16px;
+  color: #2d9cdb;
+}
+.remaining-traits {
+  text-transform: none;
+  font-weight: bold;
+  margin-top: 10px;
+  display: block;
 }
