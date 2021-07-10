@@ -1,11 +1,11 @@
-<svelte:options tag="svelte-custom-element" />
+<svelte:options tag="rarible-widget" />
 
 <script>
   import { createEventDispatcher, onDestroy, onMount } from 'svelte'
   import { fade } from 'svelte/transition'
   import { isLoading, t, locale } from 'svelte-i18n'
   import setupI18N from './lib/i18n'
-  import Clock from './clock/Clock.svelte'
+  import NFTCard from './nft-card/nft-card.svelte'
 
   export let title = 'Hello from component!!'
   let initialized = false
@@ -59,7 +59,7 @@
 
     {#if visible}
       <div class="clock-container" transition:fade>
-        <Clock />
+        <NFTCard />
       </div>
     {/if}
   </div>

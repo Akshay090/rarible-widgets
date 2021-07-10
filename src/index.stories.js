@@ -1,6 +1,6 @@
 import CustomElement from './index.svelte'
 
-export default { title: 'CustomElement' }
+export default { title: 'Rarible Widgets' }
 
 export const CustomElementStory = () => ({
   Component: CustomElement,
