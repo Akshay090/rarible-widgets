@@ -110,6 +110,7 @@ dist/static
 
 # static folder to host when spinning up Storybook
 /.storybook/static/*
+storybook-static
 
 # basic log files
 access.log
