@@ -5,7 +5,7 @@
   import { fade } from 'svelte/transition'
   import { isLoading, t, locale } from 'svelte-i18n'
   import setupI18N from './lib/i18n'
-  import NFTCard from './nft-card/nft-card.svelte'
+import NftCard from './widgets/nft-card/nft-card.svelte';
 
   export let title = 'Hello from component!!'
   let initialized = false
@@ -59,7 +59,7 @@
 
     {#if visible}
       <div class="clock-container" transition:fade>
-        <NFTCard />
+        <NftCard />
       </div>
     {/if}
   </div>

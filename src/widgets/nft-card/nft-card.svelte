@@ -1,7 +1,11 @@
 <script>
+  import InfoBtn from './components/info-btn.svelte'
+  import Pill from './components/pill.svelte'
+
   // your script goes here
   let flipped = false
   function flipCard() {
+    console.log('flip clicked')
     flipped = !flipped
   }
 </script>
@@ -14,24 +18,7 @@
     <!-- front part -->
     <div class="card-front">
       <!-- info btn -->
-      <div style="position: absolute; top: 5px; right: 5px">
-        <div class="asset-action-info" on:click={flipCard}>
-          <svg
-            id="info-btn"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-          >
-            <path d="M0 0h24v24H0z" fill="transparent" />
-            <path
-              id="info-icon"
-              fill="rgb(82, 87, 89)"
-              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
-            />
-          </svg>
-        </div>
-      </div>
+      <InfoBtn on:filp={flipCard} />
 
       <div class="asset-image-container">
         <a
@@ -46,36 +33,8 @@
       </div>
 
       <div class="asset-details-container">
-        <div class="asset-detail">
-          <div class="asset-detail-type">
-            <a
-              class="asset-link"
-              target="_blank"
-              href="http://opensea.io/assets/josie"
-            >
-              <!-- pills -->
-              <div
-                class="pill "
-                style="color: rgb(130, 130, 130); border: 1px solid rgb(226, 230, 239);"
-              >
-                <img
-                  alt=""
-                  src="https://lh3.googleusercontent.com/MH5BjzH36amUJIvYTs1C4ty-ZRcNp9heRIwKCHdEiFmgFISOzvLHhzKEIwtoYNUkfr_1m4or1EA7LAXoJF0lPd0=s120"
-                />
-
-                <p><!---->Josie<!----></p>
-              </div>
-            </a>
-          </div>
-          <!-- This badge is optional and must be rendered programmatically -->
-          <!-- <div class="asset-detail-badge">
-              <pill-element
-                label="New"
-                backgroundColor="#23DC7D"
-                textColor="#FFFFFF"
-              ></pill-element>
-            </div> -->
-        </div>
+        <Pill />
+        
         <div class="spacer" />
         <div class="asset-detail-name">
           <a
@@ -111,24 +70,7 @@
     </div>
 
     <div class="card-back">
-      <div style="position: absolute; top: 5px; right: 5px">
-        <div class="asset-action-info" on:click={flipCard}>
-          <svg
-            id="info-btn"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-          >
-            <path d="M0 0h24v24H0z" fill="transparent" />
-            <path
-              id="info-icon"
-              fill="rgb(82, 87, 89)"
-              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
-            />
-          </svg>
-        </div>
-      </div>
+      <InfoBtn on:filp={flipCard} />
 
       <div class="card-back-inner">
         <div class="attribute-container attribute-properties">
