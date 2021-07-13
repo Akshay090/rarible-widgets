@@ -24,6 +24,12 @@
 </div>
 
 <style>
+  /* Global part */
+  :host {
+    all: initial;
+  }
+
+  /* end - Global Part */
   .asset-action-info {
     cursor: pointer;
     transition: 200ms;
