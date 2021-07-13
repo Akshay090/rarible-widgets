@@ -2,7 +2,15 @@
   import InfoBtn from './info-btn.svelte'
   import Pill from './pill.svelte'
 
-  // your script goes here
+  export let nftData
+  export let contractAddress
+  export let tokenId
+
+  let previewPic
+
+  if (nftData.image.url.PREVIEW) {
+    previewPic = nftData.image.url.PREVIEW
+  }
 </script>
 
 <div class="card-front">
@@ -12,11 +20,11 @@
   <div class="asset-image-container">
     <a
       target="_blank"
-      href="https://opensea.io/assets/0xecf7ef42b57ee37a959bf507183c5dd6bf182081/7"
+      href={`https://rarible.com/token/${contractAddress}:${tokenId}`}
     >
       <div
         class="asset-image"
-        style="background-image: url(&quot;https://lh3.googleusercontent.com/sJ-5wTKPHUJNePVxCGRV4UTsOf8TvY6r0ML89J9EuDWNrA8CljGT9TAhCv9afmyJJI2s8QNKcvbXP5erh0EKBjwX=s250&quot;); background-size: contain;"
+        style={`background-image: url(${previewPic}); background-size: contain;`}
       />
     </a>
   </div>
@@ -29,8 +37,8 @@
       <a
         class="asset-link"
         target="_blank"
-        href="https://opensea.io/assets/0xecf7ef42b57ee37a959bf507183c5dd6bf182081/7"
-        ><!---->Tune NFT NAME<!----></a
+        href={`https://rarible.com/token/${contractAddress}:${tokenId}`}
+        >{nftData.name}</a
       >
     </div>
 
@@ -38,7 +46,7 @@
       <a
         class="asset-link"
         target="_blank"
-        href="https://opensea.io/assets/0xecf7ef42b57ee37a959bf507183c5dd6bf182081/7"
+        href={`https://rarible.com/token/${contractAddress}:${tokenId}`}
       >
         <div class="asset-detail-price">
           <div class="previous-value">Prev.&nbsp;</div>

@@ -1,7 +1,13 @@
 <script>
   import InfoBtn from './info-btn.svelte'
+  import Property from './property.svelte'
 
-  // your script goes here
+  export let nftData
+  let attributeLength
+  $: {
+    attributeLength = nftData.attributes.length - 2
+    console.log("attr ", attributeLength);
+  }
 </script>
 
 <div class="card-back">
@@ -27,24 +33,19 @@
         <p class="attribute-title">Properties</p>
       </div>
 
-      <!---->
-      <div class="trait_property" style="height: 50px; margin-bottom: 10px;">
-        <p class="trait_property-type"><!---->artist<!----></p>
-        <p class="trait_property-value"><!---->Josephine Bellini<!----></p>
-      </div>
-      <!---->
-      <div class="trait_property" style="height: 50px; margin-bottom: 10px;">
-        <p class="trait_property-type"><!---->edition info<!----></p>
-        <p class="trait_property-value"><!---->6 of 20<!----></p>
-      </div>
-      <!---->
+      {#each nftData.attributes.slice(0, 2) as item}
+        <!-- content here -->
+        <Property key={item.key} value={item.value} />
+      {/each}
 
-      <a
-        class="remaining-traits"
-        target="_blank"
-        href="https://opensea.io/assets/0xecf7ef42b57ee37a959bf507183c5dd6bf182081/7"
-        >+3 more</a
-      >
+      {#if attributeLength > 0}
+        <a
+          class="remaining-traits"
+          target="_blank"
+          href="https://opensea.io/assets/0xecf7ef42b57ee37a959bf507183c5dd6bf182081/7"
+          >{`+${attributeLength} more`}</a
+        >
+      {/if}
     </div>
 
     <div class="attribute-container" />
@@ -116,41 +117,6 @@
   }
   .trait-icon {
     height: 100%;
-  }
-  .trait_property {
-    display: flex;
-    flex-flow: column;
-    justify-content: space-between;
-    background: #edfbff;
-    border: 1px solid #2d9cdb;
-    border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box;
-    text-align: center;
-    border: 1px solid #2d9cdb;
-    background-color: #edfbff;
-    border-radius: 6px;
-    padding: 8px;
-  }
-  .trait_property p {
-    margin: 7px 0;
-    font-weight: 400;
-    color: rgba(0, 0, 0, 0.87);
-  }
-  .trait_property .trait_property-type {
-    margin: 0;
-    font-size: 11px;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: #2d9cdb;
-    opacity: 0.8;
-  }
-  .trait_property .trait_property-value {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    margin: 0;
-    color: rgba(0, 0, 0, 0.87);
   }
   .trait_ranking {
     margin-bottom: 16px;
