@@ -3,8 +3,8 @@
 
   import Card from './components/card.svelte'
 
-  export let contractAddress = '0xecf7ef42b57ee37a959bf507183c5dd6bf182081'
-  export let tokenId = '7'
+  export let contractAddress
+  export let tokenId
   let nftData = null
   let loading = true
 
@@ -29,7 +29,7 @@
   // your script goes here
 </script>
 
-<Card {loading} {nftData} {contractAddress} {tokenId}/>
+<Card {loading} {nftData} {contractAddress} {tokenId} />
 
 <style>
   /* your styles go here */
